@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/people/new/', [PeopleController::class, 'newPeople'])->name('new.people');
-
+Route::post('/people/add/', [PeopleController::class, 'addNewPeople'])->name('add.people');
