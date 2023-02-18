@@ -16,6 +16,10 @@ class Animal extends Model
         return $this->belongsTo('App\Models\People');
     }
 
+    /*
+     * Collecting animals data for people animal list modal
+     * on home page.
+     */
     public static function myAnimalsData($id)
     {
         return Animal::where('owner_id', $id)->get();
