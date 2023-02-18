@@ -9,6 +9,8 @@ class Animal extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'genre', 'owner_id'];
+
     public function peoples()
     {
         return $this->belongsTo('App\Models\People');

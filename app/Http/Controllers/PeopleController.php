@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Animal;
 use App\Models\People;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,13 @@ class PeopleController extends Controller
 
     public function showPeople($id)
     {
-        //
+        $animals = Animal::where('owner_id', $id)->get();
+        $user = People::where('id', $id)->first();
+
+        return view('people_profile')->with([
+            'animals' => $animals,
+            'user' => $user
+        ]);
     }
 
     /*
