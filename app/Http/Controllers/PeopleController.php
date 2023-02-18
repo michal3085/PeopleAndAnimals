@@ -14,11 +14,22 @@ class PeopleController extends Controller
         return view('home')->with(['peoples' => $peoples]);
     }
 
+    public function showPeople($id)
+    {
+        //
+    }
+
+    /*
+     * Returns new people add view.
+     */
     public function newPeople()
     {
         return view('new_people');
     }
 
+    /*
+     * Save data from new.people view to database.
+     */
     public function addNewPeople(Request $request)
     {
         $people = new People();

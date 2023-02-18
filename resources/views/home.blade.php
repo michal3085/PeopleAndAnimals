@@ -12,34 +12,35 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
+            <!-- New People Button-->
+            <a href="{{ route('new.people') }}" class="btn btn-outline-primary">Dodaj osobę</a>
         </div>
-        <a href="{{ route('new.people') }}" class="btn btn-outline-primary">Dodaj osobę</a>
         <!-- Table-->
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Imię</th>
-                <th scope="col">Nazwisko</th>
-                <th scope="col">Zwierzęta</th>
-                <th scope="col">Usuń</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($peoples as $people)
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>{{$people->name}}</td>
-                    <td>{{$people->surname}}</td>
-                    <td><a href="" class="btn btn-outline-primary">Pokaż</a></td>
-                    <form method="POST" action="">
-                        @csrf
-                        @method('delete')
-                        <td><button type="submit" class="btn btn-danger">Usuń</button></td>
-                    </form>
+                    <th scope="col">#</th>
+                    <th scope="col">Imię i Nazwisko</th>
+                    <th scope="col">Zwierzęta</th>
+                    <th scope="col">Usuń</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach($peoples as $people)
+                    <tr>
+                        <th scope="row">{{$people->id}}</th>
+                        <td><a href="{{ route('show.people', ['id' => $people->id]) }}">{{$people->name}} {{ $people->surname }}</a></td>
+                        <td><a href="" class="btn btn-outline-primary">Pokaż</a></td>
+                        <form method="POST" action="">
+                            @csrf
+                            @method('delete')
+                            <td><button type="submit" class="btn btn-danger">Usuń</button></td>
+                        </form>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </section>
 @endsection
