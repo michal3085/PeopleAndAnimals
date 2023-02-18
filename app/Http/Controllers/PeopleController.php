@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class PeopleController extends Controller
 {
+    public function index()
+    {
+        $peoples = People::all();
+        return view('home')->with(['peoples' => $peoples]);
+    }
+
     public function newPeople()
     {
         return view('new_people');

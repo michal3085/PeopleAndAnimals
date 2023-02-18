@@ -22,23 +22,23 @@
                 <th scope="col">Imię</th>
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Zwierzęta</th>
-                <th scope="col">Edycja</th>
                 <th scope="col">Usuń</th>
             </tr>
             </thead>
             <tbody>
+            @foreach($peoples as $people)
                 <tr>
                     <th scope="row">1</th>
-                    <td>Andrzej</td>
-                    <td>Babilonsky</td>
-                    <td>Ma zwierza</td>
-                    <td><a href="" class="btn btn-outline-primary">Edytuj</a></td>
+                    <td>{{$people->name}}</td>
+                    <td>{{$people->surname}}</td>
+                    <td><a href="" class="btn btn-outline-primary">Pokaż</a></td>
                     <form method="POST" action="">
                         @csrf
                         @method('delete')
                         <td><button type="submit" class="btn btn-danger">Usuń</button></td>
                     </form>
                 </tr>
+            @endforeach
             </tbody>
         </table>
     </section>

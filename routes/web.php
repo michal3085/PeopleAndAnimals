@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+//Route::get('/', function () {
+//    return view('home');
+//});
 
+Route::get('/', [PeopleController::class, 'index'])->name('index');
 Route::get('/people/new/', [PeopleController::class, 'newPeople'])->name('new.people');
 Route::post('/people/add/', [PeopleController::class, 'addNewPeople'])->name('add.people');
