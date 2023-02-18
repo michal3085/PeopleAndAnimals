@@ -24,3 +24,4 @@ Route::get('/people/new/', [PeopleController::class, 'newPeople'])->name('new.pe
 Route::post('/people/add/', [PeopleController::class, 'addNewPeople'])->name('add.people');
 Route::get('/people/show/{id}', [PeopleController::class, 'showPeople'])->name('show.people');
 Route::post('/animal/add/{id}', [AnimalController::class, 'addAnimal'])->name('add.animal');
+Route::post('/people/edit/{id}', [PeopleController::class, 'editPeople'])->name('edit.people');

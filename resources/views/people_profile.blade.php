@@ -12,9 +12,11 @@
                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
                                 </div>
                                 <div class="col-lg-6 px-xl-10">
-                                    <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded" data-bs-toggle="modal" data-bs-target="#userEditModal">
                                         <h3 class="h2 text-white mb-0">{{ $user->name }} {{ $user->surname }}</h3>
                                     </div>
+                                        <br>
+                                    <span>Naciśnij nazwę użytkownika, aby edytować.</span>
 {{--                                    <ul class="list-unstyled mb-1-9">--}}
 {{--                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Position:</span> Coach</li>--}}
 {{--                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Experience:</span> 10 Years</li>--}}
@@ -79,4 +81,37 @@
             </div>
         </div>
     </section>
+    <div class="portfolio-modal modal fade" id="userEditModal" tabindex="-1" aria-labelledby="userEditModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
+                        <form action="{{ route('edit.people', ['id' => $user->id]) }}" method="POST" id="contactForm" name="sentMessage" novalidate="novalidate">
+                            {{ csrf_field() }}
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label>Imię</label>
+                                    <input class="form-control" id="name" name="name" type="text" value="{{ $user->name }}"/>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label>Nazwisko</label>
+                                    <input class="form-control" id="surname" name="surname" type="text" value="{{ $user->surname }}" required="required" data-validation-required-message="Proszę podać Nazwisko"/>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <br />
+                            <div id="success"></div>
+                            <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Dodaj Osobę</button></div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

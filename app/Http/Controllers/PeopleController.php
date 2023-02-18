@@ -46,4 +46,14 @@ class PeopleController extends Controller
 
         return redirect()->back()->with(['message' => 'succes']);
     }
+
+    public function editPeople(Request $request, $id)
+    {
+        $people = People::where('id', $id)->first();
+        $people->name = $request->name;
+        $people->surname = $request->surname;
+        $people->save();
+
+        return redirect()->back();
+    }
 }
