@@ -15,4 +15,9 @@ class Animal extends Model
     {
         return $this->belongsTo('App\Models\People');
     }
+
+    public static function myAnimalsData($id)
+    {
+        return Animal::where('owner_id', $id)->get();
+    }
 }
