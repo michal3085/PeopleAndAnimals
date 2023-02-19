@@ -15,7 +15,7 @@
             <!-- New People Button-->
             <a href="{{ route('new.people') }}" class="btn btn-outline-primary">Dodaj osobę</a>
         </div>
-        <!-- Table-->
+        <!-- People List-->
         <div class="container">
             <table class="table table-striped">
                 <thead>
@@ -39,7 +39,6 @@
                         </form>
                     </tr>
 {{--                    Animal List Modal--}}
-                    {{--                                       Animal Edit Modal --}}
                     <div class="portfolio-modal modal fade" id="animalListModal-{{ $people->id, $people->name, $people->surname }}" tabindex="-1" aria-labelledby="animalListModal" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
