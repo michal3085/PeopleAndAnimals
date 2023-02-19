@@ -15,4 +15,16 @@ class People extends Model
         return $this->hasMany('App\Models\Animal');
     }
 
+    /*
+     * Method checks if People with given credentials exists.
+     */
+    public static function peopleExist($surname, $name): int
+    {
+        if ( People::where('surname', $surname)->where('name', $name)->count() == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 }

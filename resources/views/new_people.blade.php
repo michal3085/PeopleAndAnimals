@@ -10,6 +10,11 @@
                         <b>{{ $_GET['message'] }}</b>, został/została poprawnie dodana.
                     </div>
                 @endif
+            @if (isset($_GET['error']) && $_GET['error'] == 1)
+                <div class="alert alert-warning" role="alert">
+                    Ta osoba jest już na liście.
+                </div>
+            @endif
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Dodaj Nową Osobę</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
@@ -35,6 +40,11 @@
                                 <label>Nazwisko</label>
                                 <input class="form-control" id="surname" name="surname" type="text" placeholder="Nazwisko" required="required" data-validation-required-message="Proszę podać Nazwisko"/>
                                 <p class="help-block text-danger"></p>
+                                @if (isset($_GET['error']) && $_GET['error'] == 2)
+                                    <div class="alert alert-warning" role="alert">
+                                        Nazwisko jest wymagane!
+                                    </div>
+                                @endif
                             </div>
                         </div>
                             <br />

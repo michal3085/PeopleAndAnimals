@@ -39,12 +39,28 @@ class PeopleController extends Controller
      */
     public function addNewPeople(Request $request)
     {
-        $people = new People();
-        $people->name = $request->name;
-        $people->surname = $request->surname;
-        $people->save();
+        if ($request->surname == NULL) {
+            return redirect()->route('new.people', ['error' => 2]);
+        }
+        if (People::peopleExist($request->surname, $request->name)) {
+            return redirect()->route('new.people', ['error' => 1]);
+        } else {
+            $people = new People();
+            $people->name = $request->name;
+            $people->surname = $request->surname;
+            $people->save();
 
-        return redirect()->route('new.people', ['message' => $people->name]);
+            return redirect()->route('new.people', ['message' => $people->name . ' ' . $people->surname]);
+        }
+    }
+
+    /*
+     * Returns People Edit View
+     */
+    public function editPeopleView($id)
+    {
+        $people = People::where('id', $id)->first();
+        return view('edit_people')->with(['people' => $people]);
     }
 
     public function editPeople(Request $request, $id)
