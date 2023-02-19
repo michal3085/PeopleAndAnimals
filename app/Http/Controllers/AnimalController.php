@@ -10,8 +10,11 @@ class AnimalController extends Controller
 {
     public function addAnimal(Request $request, $id)
     {
-        if (Animal::where('name', $request->name)->where('owner_id', $id)->count() > 0) {
-            return redirect()->back()->with(['error' => 'animal_exist']);
+        if ($request->name == NULL){
+            return redirect()->route('show.people', ['error' => 2, 'id' => $id]);
+        }
+        if (Animal::animalExist($id, $request->name)) {
+            return redirect()->route('show.people', ['error' => 1, 'id' => $id]);
         } else {
 
             $animal = new Animal();
@@ -20,18 +23,26 @@ class AnimalController extends Controller
             $animal->genre = $request->genre;
             $animal->save();
 
-            return redirect()->back()->with(['success' => 1]);
+            return redirect()->route('show.people', ['success' => 1, 'id' => $id]);
         }
     }
 
     public function editAnimal(Request $request, $id)
     {
         $animal = Animal::where('id', $id)->first();
-        $animal->name = $request->name;
-        $animal->genre = $request->genre;
-        $animal->save();
 
-        return redirect()->back();
+        if ($request->name == NULL){
+            return redirect()->route('show.people', ['error' => 2, 'id' => $animal->owner_id]);
+        }
+        if (Animal::animalExist($animal->owner_id, $request->name)) {
+            return redirect()->route('show.people', ['error' => 1, 'id' => $animal->owner_id]);
+        } else {
+            $animal->name = $request->name;
+            $animal->genre = $request->genre;
+            $animal->save();
+
+            return redirect()->back();
+        }
     }
 
     public function deleteAnimal($id)

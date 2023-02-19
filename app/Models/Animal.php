@@ -25,9 +25,13 @@ class Animal extends Model
         return Animal::where('owner_id', $id)->get();
     }
 
+    /*
+     * The method checks if there is such an animal assigned to
+     * a human with a given id.
+     */
     public static function animalExist($owner_id, $name): int
     {
-        if (Animal::with('owner_id', $owner_id)->with('name', $name)->count() >= 1) {
+        if (Animal::where('owner_id', $owner_id)->where('name', $name)->count() == 1) {
             return 1;
         } else {
             return 0;

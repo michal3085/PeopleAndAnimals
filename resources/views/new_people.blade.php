@@ -41,7 +41,7 @@
                                 <input class="form-control" id="surname" name="surname" type="text" placeholder="Nazwisko" required="required" data-validation-required-message="Proszę podać Nazwisko"/>
                                 <p class="help-block text-danger"></p>
                                 @if (isset($_GET['error']) && $_GET['error'] == 2)
-                                    <div class="alert alert-warning" role="alert">
+                                    <div class="alert alert-danger" role="alert">
                                         Nazwisko jest wymagane!
                                     </div>
                                 @endif

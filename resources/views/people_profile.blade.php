@@ -31,6 +31,21 @@
                         </div>
                     </div>
                 </div>
+                @if (isset($_GET['error']) && $_GET['error'] == 1)
+                    <div class="alert alert-warning" role="alert">
+                        Masz już takie zwierzę!
+                    </div>
+                @endif
+                @if (isset($_GET['error']) && $_GET['error'] == 2)
+                    <div class="alert alert-danger" role="alert">
+                        Nazwa zwierzęcia jest wymagana!
+                    </div>
+                @endif
+                @if (isset($_GET['success']) && $_GET['success'] == 1)
+                    <div class="alert alert-success" role="alert">
+                        Zwierzę zostało dodane!
+                    </div>
+                @endif
                 <form action="{{ route('add.animal', ['id' => $user->id]) }}" method="POST">
                     {{ csrf_field() }}
                     <label>Nowe zwierzę:</label>
