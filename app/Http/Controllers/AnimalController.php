@@ -41,7 +41,7 @@ class AnimalController extends Controller
             $animal->genre = $request->genre;
             $animal->save();
 
-            return redirect()->back();
+            return redirect()->route('show.people', ['success' => 2, 'id' => $animal->owner_id]);
         }
     }
 

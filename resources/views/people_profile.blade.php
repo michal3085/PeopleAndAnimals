@@ -46,6 +46,11 @@
                         Zwierzę zostało dodane!
                     </div>
                 @endif
+                @if (isset($_GET['success']) && $_GET['success'] == 2)
+                    <div class="alert alert-success" role="alert">
+                        Zwierzę zostało zaktualizowane!
+                    </div>
+                @endif
                 <form action="{{ route('add.animal', ['id' => $user->id]) }}" method="POST">
                     {{ csrf_field() }}
                     <label>Nowe zwierzę:</label>
