@@ -50,7 +50,7 @@
                                             <div class="col-lg-8">
                                                 <!-- Portfolio Modal - Title-->
                                                 <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{$people->name}} {{$people->surname}} </h2>
-                                                        <a href="{{ route('edit.people.view', ['id' => $people->id]) }}"><i class="fas fa-edit"></i></a>
+                                                        <a href="{{ route('edit.people.view', ['id' => $people->id]) }}"><i class="fas fa-edit" style="width: 25px; height: 25px;"></i> Edytuj</a>
                                                     <br/>
                                                 <!-- Icon Divider-->
                                                 <div class="divider-custom">
@@ -61,7 +61,10 @@
                                                 <!-- Portfolio Modal - Image-->
                                                 <div class="col-lg-8 mx-auto">
                                                     @foreach(\App\Models\Animal::myAnimalsData($people->id) as $animals)
-                                                        <b>{{ $animals->name }}</b> ({{ $animals->genre }})
+                                                        <b>{{ $animals->name }}</b>
+                                                            @if(isset($animals->genre))
+                                                                ({{ $animals->genre }})
+                                                            @endif
                                                         <br>
                                                     @endforeach
                                                 </div>
