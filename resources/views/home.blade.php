@@ -46,7 +46,8 @@
                                 <div class="modal-body text-center pb-5">
                                     <div class="col-lg-8 mx-auto">
                                         @foreach(\App\Models\Animal::myAnimalsData($people->id) as $animals)
-                                            {{ $animals->name }}<br>
+                                            <b>{{ $animals->name }}</b> ({{ $animals->genre }})
+                                            <br>
                                         @endforeach
                                     </div>
                                 </div>

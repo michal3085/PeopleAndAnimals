@@ -23,4 +23,20 @@ class AnimalController extends Controller
             return redirect()->back()->with(['success' => 1]);
         }
     }
+
+    public function editAnimal(Request $request, $id)
+    {
+        $animal = Animal::where('id', $id)->first();
+        $animal->name = $request->name;
+        $animal->genre = $request->genre;
+        $animal->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteAnimal($id)
+    {
+        Animal::where('id', $id)->delete();
+        return redirect()->back();
+    }
 }

@@ -19,9 +19,18 @@ use Illuminate\Support\Facades\Route;
 //    return view('home');
 //});
 
+/*
+ *  People routes
+ */
 Route::get('/', [PeopleController::class, 'index'])->name('index');
 Route::get('/people/new/', [PeopleController::class, 'newPeople'])->name('new.people');
 Route::post('/people/add/', [PeopleController::class, 'addNewPeople'])->name('add.people');
 Route::get('/people/show/{id}', [PeopleController::class, 'showPeople'])->name('show.people');
-Route::post('/animal/add/{id}', [AnimalController::class, 'addAnimal'])->name('add.animal');
 Route::post('/people/edit/{id}', [PeopleController::class, 'editPeople'])->name('edit.people');
+
+/*
+ * Animals routes
+ */
+Route::post('/animal/add/{id}', [AnimalController::class, 'addAnimal'])->name('add.animal');
+Route::post('/animal/edit/{id}', [AnimalController::class, 'editAnimal'])->name('edit.animal');
+Route::delete('/animal/delete/{id}', [AnimalController::class, 'deleteAnimal'])->name('delete.animal');

@@ -64,13 +64,58 @@
                                             <th scope="row">{{$animal->id}}</th>
                                             <td><a href="">{{$animal->name}}</a></td>
                                             <td><a href="">{{$animal->genre}}</a></td>
-                                            <td><a href="" class="btn btn-outline-primary">Edytuj</a></td>
-                                            <form method="POST" action="">
+                                            <td><a href="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#animalEditModal-{{ $animal->name, $animal->genre, $animal->id }}">Edytuj</a></td>
+                                            <form method="POST" action="{{ route('delete.animal', ['id' => $animal->id]) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <td><button type="submit" class="btn btn-danger">Usuń</button></td>
                                             </form>
                                         </tr>
+{{--                                       Animal Edit Modal --}}
+                                        <div class="portfolio-modal modal fade" id="animalEditModal-{{ $animal->name, $animal->genre, $animal->id }}" tabindex="-1" aria-labelledby="animalEditModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                                <div class="modal-body text-center pb-5">
+                                                    <div class="container">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-lg-8">
+                                                                <!-- Portfolio Modal - Title-->
+                                                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Edycja Zwierzęcia</h2>
+                                                                <!-- Icon Divider-->
+                                                                <div class="divider-custom">
+                                                                    <div class="divider-custom-line"></div>
+                                                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                                                    <div class="divider-custom-line"></div>
+                                                                </div>
+                                                                <!-- Portfolio Modal - Image-->
+                                                                <form action="{{ route('edit.animal', ['id' => $animal->id]) }}" method="POST" id="contactForm" name="sentMessage" novalidate="novalidate">
+                                                                    {{ csrf_field() }}
+                                                                    <div class="control-group">
+                                                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                                            <label>Nazwa</label>
+                                                                            <input class="form-control" id="name" name="name" type="text" value="{{ $animal->name }}"/>
+                                                                            <p class="help-block text-danger"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="control-group">
+                                                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                                            <label>Gatunek</label>
+                                                                            <input class="form-control" id="surname" name="genre" type="text" value="{{ $animal->genre }}" required="required" data-validation-required-message="Proszę podać Nazwisko"/>
+                                                                            <p class="help-block text-danger"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <div id="success"></div>
+                                                                    <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Zapisz zmiany</button></div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+{{--                                       !Animal Edit Modal--}}
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -81,13 +126,13 @@
             </div>
         </div>
     </section>
+{{--    People Edit Modal   --}}
     <div class="portfolio-modal modal fade" id="userEditModal" tabindex="-1" aria-labelledby="userEditModal" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
                 <div class="modal-body text-center pb-5">
                     <div class="col-lg-8 mx-auto">
-                        <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
                         <form action="{{ route('edit.people', ['id' => $user->id]) }}" method="POST" id="contactForm" name="sentMessage" novalidate="novalidate">
                             {{ csrf_field() }}
                             <div class="control-group">
@@ -104,14 +149,13 @@
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
-                            <br />
-                            <div id="success"></div>
-                            <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Dodaj Osobę</button></div>
+                                <br/>
+                                    <div id="success"></div>
+                            <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Zapisz</button></div>
                         </form>
                     </div>
                 </div>
                 </div>
             </div>
         </div>
-    </div>
 @endsection
