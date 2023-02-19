@@ -4,7 +4,12 @@
     <!-- Contact Section-->
     <section class="masthead page-section" id="contact">
         <div class="container">
-            <!-- Contact Section Heading-->
+            <!-- People Successful Added Message-->
+                @if (isset($_GET['message']))
+                    <div class="alert alert-success" role="alert">
+                        <b>{{ $_GET['message'] }}</b>, został/została poprawnie dodana.
+                    </div>
+                @endif
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Dodaj Nową Osobę</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">

@@ -44,7 +44,7 @@ class PeopleController extends Controller
         $people->surname = $request->surname;
         $people->save();
 
-        return redirect()->back()->with(['message' => 'succes']);
+        return redirect()->route('new.people', ['message' => $people->name]);
     }
 
     public function editPeople(Request $request, $id)
@@ -55,5 +55,13 @@ class PeopleController extends Controller
         $people->save();
 
         return redirect()->back();
+    }
+
+    public function deletePeople($id)
+    {
+        Animal::where('owner_id', $id)->delete();
+        People::where('id', $id)->delete();
+
+        return redirect('/');
     }
 }

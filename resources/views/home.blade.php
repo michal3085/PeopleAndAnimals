@@ -31,33 +31,92 @@
                     <tr>
                         <th scope="row">{{$people->id}}</th>
                         <td><a href="{{ route('show.people', ['id' => $people->id]) }}">{{$people->name}} {{ $people->surname }}</a></td>
-                        <td><a href="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#animalListModal-{{$people->id}}">Pokaż</a></td>
-                        <form method="POST" action="">
+                        <td><a href="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#animalListModal-{{$people->id, $people->name, $people->surname}}">Pokaż</a></td>
+                        <form method="POST" action="{{ route('delete.people', ['id' => $people->id]) }}">
                             @csrf
                             @method('delete')
                             <td><button type="submit" class="btn btn-danger">Usuń</button></td>
                         </form>
                     </tr>
 {{--                    Animal List Modal--}}
-                    <div class="portfolio-modal modal fade" id="animalListModal-{{$people->id}}" tabindex="-1" aria-labelledby="animalListModal" aria-hidden="true">
+                    {{--                                       Animal Edit Modal --}}
+                    <div class="portfolio-modal modal fade" id="animalListModal-{{ $people->id, $people->name, $people->surname }}" tabindex="-1" aria-labelledby="animalListModal" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                 <div class="modal-body text-center pb-5">
-                                    <div class="col-lg-8 mx-auto">
-                                        @foreach(\App\Models\Animal::myAnimalsData($people->id) as $animals)
-                                            <b>{{ $animals->name }}</b> ({{ $animals->genre }})
-                                            <br>
-                                        @endforeach
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                <!-- Portfolio Modal - Title-->
+                                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{$people->name}} {{$people->surname}}</h2>
+                                                <!-- Icon Divider-->
+                                                <div class="divider-custom">
+                                                    <div class="divider-custom-line"></div>
+                                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                                    <div class="divider-custom-line"></div>
+                                                </div>
+                                                <!-- Portfolio Modal - Image-->
+                                                <div class="col-lg-8 mx-auto">
+                                                    @foreach(\App\Models\Animal::myAnimalsData($people->id) as $animals)
+                                                        <b>{{ $animals->name }}</b> ({{ $animals->genre }})
+                                                        <br>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 {{--                    !Animal List Modal--}}
                 @endforeach
                 </tbody>
             </table>
         </div>
     </section>
+    {{--                                       People Edit Modal --}}
+    <div class="portfolio-modal modal fade" id="peopleEditModal-{{ $people->id, $people->name, $people->surname  }}" tabindex="-1" aria-labelledby="peopleEditModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Edycja dla {{$people->surname}}</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image-->
+                                <form action="{{ route('edit.people', ['id' => $people->id]) }}" method="POST" id="contactForm" name="sentMessage" novalidate="novalidate">
+                                    {{ csrf_field() }}
+                                    <div class="control-group">
+                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                            <label>Nazwa</label>
+                                            <input class="form-control" id="name" name="name" type="text" value="{{ $people->name }}"/>
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                            <label>Nazwisko</label>
+                                            <input class="form-control" id="surname" name="genre" type="text" value="{{ $people->surname }}" required="required" data-validation-required-message="Proszę podać Nazwisko"/>
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div id="success"></div>
+                                    <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Zapisz zmiany</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 @endsection

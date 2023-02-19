@@ -27,6 +27,7 @@ Route::get('/people/new/', [PeopleController::class, 'newPeople'])->name('new.pe
 Route::post('/people/add/', [PeopleController::class, 'addNewPeople'])->name('add.people');
 Route::get('/people/show/{id}', [PeopleController::class, 'showPeople'])->name('show.people');
 Route::post('/people/edit/{id}', [PeopleController::class, 'editPeople'])->name('edit.people');
+Route::delete('/people/delete/{id}', [PeopleController::class, 'deletePeople'])->name('delete.people');
 
 /*
  * Animals routes

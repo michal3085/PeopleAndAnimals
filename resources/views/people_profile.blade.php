@@ -15,15 +15,17 @@
                                     <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded" data-bs-toggle="modal" data-bs-target="#userEditModal">
                                         <h3 class="h2 text-white mb-0">{{ $user->name }} {{ $user->surname }}</h3>
                                     </div>
-                                        <br>
+                                    <br>
                                     <span>Naciśnij nazwę użytkownika, aby edytować.</span>
-{{--                                    <ul class="list-unstyled mb-1-9">--}}
-{{--                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Position:</span> Coach</li>--}}
-{{--                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Experience:</span> 10 Years</li>--}}
-{{--                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> edith@mail.com</li>--}}
-{{--                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Website:</span> www.example.com</li>--}}
-{{--                                        <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> 507 - 541 - 4567</li>--}}
-{{--                                    </ul>--}}
+                                    <ul class="list-unstyled mb-1-9">
+                                        <li>
+                                        <form method="POST" action="{{ route('delete.people', ['id' => $user->id]) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <td><button type="submit" class="btn btn-danger">Usuń osobę</button></td>
+                                        </form>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -44,89 +46,89 @@
                     </div>
                 </form>
                 <div class="col-lg-12 mb-4 mb-sm-5">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-12 mb-4 mb-sm-5">
-                            <div class="container">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nazwa Zwierzęcia</th>
-                                        <th scope="col">Gatunek</th>
-                                        <th scope="col">Edytuj</th>
-                                        <th scope="col">Usuń</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($animals as $animal)
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12 mb-4 mb-sm-5">
+                                <div class="container">
+                                    <table class="table table-striped">
+                                        <thead>
                                         <tr>
-                                            <th scope="row">{{$animal->id}}</th>
-                                            <td><a href="">{{$animal->name}}</a></td>
-                                            <td><a href="">{{$animal->genre}}</a></td>
-                                            <td><a href="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#animalEditModal-{{ $animal->name, $animal->genre, $animal->id }}">Edytuj</a></td>
-                                            <form method="POST" action="{{ route('delete.animal', ['id' => $animal->id]) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <td><button type="submit" class="btn btn-danger">Usuń</button></td>
-                                            </form>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nazwa Zwierzęcia</th>
+                                            <th scope="col">Gatunek</th>
+                                            <th scope="col">Edytuj</th>
+                                            <th scope="col">Usuń</th>
                                         </tr>
-{{--                                       Animal Edit Modal --}}
-                                        <div class="portfolio-modal modal fade" id="animalEditModal-{{ $animal->name, $animal->genre, $animal->id }}" tabindex="-1" aria-labelledby="animalEditModal" aria-hidden="true">
-                                        <div class="modal-dialog modal-xl">
-                                            <div class="modal-content">
-                                                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                                <div class="modal-body text-center pb-5">
-                                                    <div class="container">
-                                                        <div class="row justify-content-center">
-                                                            <div class="col-lg-8">
-                                                                <!-- Portfolio Modal - Title-->
-                                                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Edycja Zwierzęcia</h2>
-                                                                <!-- Icon Divider-->
-                                                                <div class="divider-custom">
-                                                                    <div class="divider-custom-line"></div>
-                                                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                                                    <div class="divider-custom-line"></div>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($animals as $animal)
+                                            <tr>
+                                                <th scope="row">{{$animal->id}}</th>
+                                                <td><a href="">{{$animal->name}}</a></td>
+                                                <td><a href="">{{$animal->genre}}</a></td>
+                                                <td><a href="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#animalEditModal-{{ $animal->name, $animal->genre, $animal->id }}">Edytuj</a></td>
+                                                <form method="POST" action="{{ route('delete.animal', ['id' => $animal->id]) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <td><button type="submit" class="btn btn-danger">Usuń</button></td>
+                                                </form>
+                                            </tr>
+                                            {{--                                       Animal Edit Modal --}}
+                                            <div class="portfolio-modal modal fade" id="animalEditModal-{{ $animal->name, $animal->genre, $animal->id }}" tabindex="-1" aria-labelledby="animalEditModal" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                                        <div class="modal-body text-center pb-5">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        <!-- Portfolio Modal - Title-->
+                                                                        <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Edycja Zwierzęcia</h2>
+                                                                        <!-- Icon Divider-->
+                                                                        <div class="divider-custom">
+                                                                            <div class="divider-custom-line"></div>
+                                                                            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                                                            <div class="divider-custom-line"></div>
+                                                                        </div>
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <form action="{{ route('edit.animal', ['id' => $animal->id]) }}" method="POST" id="contactForm" name="sentMessage" novalidate="novalidate">
+                                                                            {{ csrf_field() }}
+                                                                            <div class="control-group">
+                                                                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                                                    <label>Nazwa</label>
+                                                                                    <input class="form-control" id="name" name="name" type="text" value="{{ $animal->name }}"/>
+                                                                                    <p class="help-block text-danger"></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="control-group">
+                                                                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                                                    <label>Gatunek</label>
+                                                                                    <input class="form-control" id="surname" name="genre" type="text" value="{{ $animal->genre }}" required="required" data-validation-required-message="Proszę podać Nazwisko"/>
+                                                                                    <p class="help-block text-danger"></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br/>
+                                                                            <div id="success"></div>
+                                                                            <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Zapisz zmiany</button></div>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
-                                                                <!-- Portfolio Modal - Image-->
-                                                                <form action="{{ route('edit.animal', ['id' => $animal->id]) }}" method="POST" id="contactForm" name="sentMessage" novalidate="novalidate">
-                                                                    {{ csrf_field() }}
-                                                                    <div class="control-group">
-                                                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                                                            <label>Nazwa</label>
-                                                                            <input class="form-control" id="name" name="name" type="text" value="{{ $animal->name }}"/>
-                                                                            <p class="help-block text-danger"></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="control-group">
-                                                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                                                            <label>Gatunek</label>
-                                                                            <input class="form-control" id="surname" name="genre" type="text" value="{{ $animal->genre }}" required="required" data-validation-required-message="Proszę podać Nazwisko"/>
-                                                                            <p class="help-block text-danger"></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <br/>
-                                                                    <div id="success"></div>
-                                                                    <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Zapisz zmiany</button></div>
-                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-{{--                                       !Animal Edit Modal--}}
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                            {{--                                       !Animal Edit Modal--}}
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
-{{--    People Edit Modal   --}}
+    {{--    People Edit Modal   --}}
     <div class="portfolio-modal modal fade" id="userEditModal" tabindex="-1" aria-labelledby="userEditModal" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -149,13 +151,13 @@
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
-                                <br/>
-                                    <div id="success"></div>
+                            <br/>
+                            <div id="success"></div>
                             <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Zapisz</button></div>
                         </form>
                     </div>
                 </div>
-                </div>
             </div>
         </div>
+    </div>
 @endsection
