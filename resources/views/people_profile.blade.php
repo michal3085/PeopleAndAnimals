@@ -42,6 +42,11 @@
                         Nazwa zwierzęcia jest wymagana!
                     </div>
                 @endif
+                @if (isset($_GET['error']) && $_GET['error'] == 3)
+                    <div class="alert alert-warning" role="alert">
+                        Zwierzę zostało usunięte!
+                    </div>
+                @endif
                 @if (isset($_GET['success']) && $_GET['success'] == 1)
                     <div class="alert alert-success" role="alert">
                         Zwierzę zostało dodane!

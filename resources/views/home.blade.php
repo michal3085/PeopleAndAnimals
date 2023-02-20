@@ -31,7 +31,6 @@
                     <tr>
                         <th scope="row">{{$people->id}}</th>
                         <td><a href="{{ route('show.people', ['id' => $people->id]) }}">{{$people->name}} {{ $people->surname }}</a></td>
-{{--                        <td><a href="javascript:void(0)" class="btn btn-outline-primary show-modal" data-bs-toggle="show-modal" id="show-modal"  data-id="{{ $people->id }}">Pokaż</a></td>--}}
                         <td><a href="javascript:void(0)" id="show-user" data-id="{{ $people->id }}" class="btn btn-outline-primary">Pokaz</a></td>
                         <form method="POST" action="{{ route('delete.people', ['id' => $people->id]) }}">
                             @csrf
@@ -39,32 +38,37 @@
                             <td><button type="submit" class="btn btn-danger">Usuń</button></td>
                         </form>
                     </tr>
-                    <div class="modal fade" id="ajax-modal" aria-hidden="true">
-                        <div class="modal-dialog">
+{{--                    User and Animals Info Modal--}}
+                    <div class="portfolio-modal modal fade" id="ajax-modal" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="userShowModal"></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="userForm" name="userForm" class="form-horizontal">
-                                        <input type="hidden" name="user_id" id="user_id">
-                                        <div class="form-group">
-                                            <label for="name" class="col-sm-2 control-label">Imię</label>
-                                            <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="" maxlength="50" required="">
+                                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                <div class="modal-body text-center pb-5">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                <h3 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="userShowModal"></h3>
+                                                <br/>
+                                        <form id="userForm" name="userForm" class="form-horizontal">
+                                            <input type="hidden" name="user_id" id="user_id">
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label">Imię</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="" maxlength="50" required="">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Nazwisko</label>
-                                            <div class="col-sm-12">
-                                                <input type="email" class="form-control" id="surname" name="surname" placeholder="Enter Email" value="" required="">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Nazwisko</label>
+                                                <div class="col-sm-12">
+                                                    <input type="email" class="form-control" id="surname" name="surname" placeholder="Enter Email" value="" required="">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                    <hr>
-                                    Zwierzęta:
+                                        </form>
+                                        <hr>
+                                        Zwierzęta:
+                                    </div>
+                                    <textarea id="animals" name="animals">.&#13;&#10;</textarea>
                                 </div>
-                                <textarea id="animals" name="animals"></textarea>
                             </div>
                         </div>
                     </div>
@@ -84,7 +88,7 @@
             $('body').on('click', '#show-user', function () {
                 var user_id = $(this).data('id');
                 $.get('/people/data/' + user_id, function (data) {
-                    $('#userShowModal').html("Użytkownik");
+                    $('#userShowModal').html("Informacje o Użytkowniku");
                     $('#ajax-modal').modal('show');
                     $('#user_id').val(data[0].id);
                     $('#name').val(data[0].name);

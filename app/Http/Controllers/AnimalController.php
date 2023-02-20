@@ -34,7 +34,7 @@ class AnimalController extends Controller
         if ($request->name == NULL){
             return redirect()->route('show.people', ['error' => 2, 'id' => $animal->owner_id]);
         }
-        if (Animal::animalExist($animal->owner_id, $request->name)) {
+        if (Animal::animalExist($animal->owner_id, $request->name) && $request->genre == NULL) {
             return redirect()->route('show.people', ['error' => 1, 'id' => $animal->owner_id]);
         } else {
             $animal->name = $request->name;
