@@ -29,6 +29,7 @@ Route::get('/people/show/{id}', [PeopleController::class, 'showPeople'])->name('
 Route::post('/people/edit/save/{id}', [PeopleController::class, 'editPeople'])->name('edit.people');
 Route::delete('/people/delete/{id}', [PeopleController::class, 'deletePeople'])->name('delete.people');
 Route::get('/people/edit/{id}', [PeopleController::class, 'editPeopleView'])->name('edit.people.view');
+Route::get('people/data/{id}', [PeopleController::class, 'peopleData']);
 
 /*
  * Animals routes

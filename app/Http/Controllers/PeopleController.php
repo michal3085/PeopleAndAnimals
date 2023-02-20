@@ -80,4 +80,10 @@ class PeopleController extends Controller
 
         return redirect('/');
     }
+
+    public function peopleData($id)
+    {
+        $data = People::where('id', $id)->first();
+        return response()->json($data);
+    }
 }
