@@ -84,6 +84,7 @@ class PeopleController extends Controller
     public function peopleData($id)
     {
         $data = People::where('id', $id)->first();
-        return response()->json($data);
+        $animals = Animal::where('owner_id', $id)->pluck('name');
+        return response()->json([$data, $animals]);
     }
 }

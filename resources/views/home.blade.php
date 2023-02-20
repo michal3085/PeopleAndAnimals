@@ -62,14 +62,9 @@
                                         </div>
                                     </form>
                                     <hr>
-                                    @foreach(\App\Models\Animal::myAnimalsData($people->id) as $animals)
-                                        <b>{{ $animals->name }}</b>
-                                        @if(isset($animals->genre))
-                                            ({{ $animals->genre }})
-                                        @endif
-                                        <br>
-                                    @endforeach
+                                    Zwierzęta:
                                 </div>
+                                <textarea id="animals" name="animals"></textarea>
                             </div>
                         </div>
                     </div>
@@ -91,9 +86,10 @@
                 $.get('/people/data/' + user_id, function (data) {
                     $('#userShowModal').html("Użytkownik");
                     $('#ajax-modal').modal('show');
-                    $('#user_id').val(data.id);
-                    $('#name').val(data.name);
-                    $('#surname').val(data.surname);
+                    $('#user_id').val(data[0].id);
+                    $('#name').val(data[0].name);
+                    $('#surname').val(data[0].surname);
+                    $('#animals').val(data[1]);
                 })
             });
 
